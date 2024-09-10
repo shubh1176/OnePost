@@ -24,9 +24,9 @@ function Header() {
   };
 
   return (
-    <div className="bg-[#8D14CE] flex justify-between items-center px-4 py-2">
+    <div className="bg-[#8D14CE] flex justify-between items-center px-4 py-7">
       <div>
-        <Image src={'/images/yellowonwhite.svg'} width={150} height={40} alt="Logo" />
+        <Image src={''} width={150} height={40} alt="Logo" />
       </div>
 
       {/* Desktop Navigation */}
