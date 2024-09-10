@@ -23,7 +23,7 @@ export default function Home() {
             <div className="flex flex-col gap-2 mb-3">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-filson">
                 <span className="bg-[#F5E27B] text-center pt-1 px-2 sm:pt-2 sm:px-3 lg:pt-3 lg:px-4 font-filson inline-flex rounded-2xl text-[#202020]">
-                  Deliver
+                  Post
                 </span>{" "}
                 any item, any time
               </h1>
