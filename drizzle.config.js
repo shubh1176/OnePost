@@ -3,6 +3,6 @@ export default {
   schema: "./utils/schema.js",
   dialect: 'postgresql',
   dbCredentials: {
-    url: 'postgresql://unicappdb_owner:hl9CBgxPL6iW@ep-blue-queen-a5sqodxk.us-east-2.aws.neon.tech/unicappdb?sslmode=require',
+    url: 'postgresql://unicapp_owner:AGIZDjkMu8S6@ep-shrill-feather-a54zxtvx.us-east-2.aws.neon.tech/unicapp?sslmode=require',
   }
 };

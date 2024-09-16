@@ -193,3 +193,8 @@ export const showPriceDetailsState = atom({
   key: 'showPriceDetailsState',
   default: false,
 });
+
+export const preferredTimeSlotState = atom({
+  key: 'preferredTimeSlotState',
+  default: '',
+});

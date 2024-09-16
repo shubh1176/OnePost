@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { UserButton, useUser, useClerk } from '@clerk/clerk-react';
 import { useRouter } from 'next/navigation';
 import { db } from '@/utils/db';
@@ -18,6 +19,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, CircleUserRound, ShieldCheck, Truck, WalletMinimal, ChevronUp, Menu, X, LogOut, ChevronDown, UserRound } from 'lucide-react';
 import { Switch } from "@/components/ui/switch";
+import { Modal, Button } from '@/components/ui'; // Assuming you have a Modal and Button component
+import { preferredTimeSlotState } from '@/store'; // Recoil state for preferredTimeSlot
 
 const svgArray = [
   '/images/loading1.svg',
@@ -65,6 +68,20 @@ function DashboardPage() {
   const [expandedOrderId, setExpandedOrderId] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false); // Sidebar state
   const [activeTab, setActiveTab] = useState('pickupDrop'); // Active tab state
+  const [timeSlotModalOpen, setTimeSlotModalOpen] = useState(false); // State for modal
+  const [preferredTimeSlot, setPreferredTimeSlot] = useRecoilState(preferredTimeSlotState); // Time slot state
+
+  const timeSlots = [
+    '09:00 - 10:00 AM',
+    '10:00 - 11:00 AM',
+    '11:00 - 12:00 PM',
+    '12:00 - 01:00 PM',
+    '01:00 - 02:00 PM',
+    '02:00 - 03:00 PM',
+    '03:00 - 04:00 PM',
+    '04:00 - 05:00 PM',
+    '05:00 - 06:00 PM',
+  ];
 
   useEffect(() => {
     if (user) {
@@ -143,6 +160,11 @@ function DashboardPage() {
           console.log('Fetched individual orders:', fetchedIndividualOrders);
 
           setIndividualOrders(fetchedIndividualOrders);
+
+          // Open the modal if preferredTimeSlot is empty
+          if (!userData.preferredTimeSlot) {
+            setTimeSlotModalOpen(true);
+          }
         } catch (error) {
           console.error('Error fetching user data and orders:', error);
         } finally {
@@ -198,6 +220,31 @@ function DashboardPage() {
         window.location.reload();  // Refresh the page
       } catch (error) {
         console.error('Error updating user role:', error);
+      }
+    }
+  };
+
+  const handleTimeSlotChange = (e) => {
+    setPreferredTimeSlot(e.target.value);
+  };
+
+  const handleConfirmTimeSlot = async () => {
+    if (userData && preferredTimeSlot) {
+      try {
+        // Update the user's preferred time slot in the database
+        await db
+          .update(schema.UserData)
+          .set({ preferredTimeSlot })
+          .where(eq(schema.UserData.email, userData.email))
+          .execute();
+
+        // Close the modal after updating
+        setTimeSlotModalOpen(false);
+
+        // Optionally reload or update the user data in state
+        setUserData({ ...userData, preferredTimeSlot });
+      } catch (error) {
+        console.error('Error updating preferred time slot:', error);
       }
     }
   };
@@ -295,18 +342,6 @@ function DashboardPage() {
                 </DropdownMenu>
               </div>
             </div>
-          </div>
-        </header>
-
-        {/* Header for Small Screens */}
-        <header className="lg:hidden bg-gradient-to-b from-[#8D14CE] to-[#470A68] text-white rounded-b-xl py-4 px-4">
-          <div className="flex items-center justify-start">
-            <button onClick={() => setSidebarOpen(!sidebarOpen)}>
-              <Menu size={24} className="text-white" />
-            </button>
-          </div>
-          <div className='mt-16'>
-            <h1 className="text-3xl font-generalMedium">Welcome {user?.firstName} 👋</h1>
           </div>
         </header>
 
@@ -606,7 +641,33 @@ function DashboardPage() {
             </div>
           </div>
         )}
-      </div>
+
+      {/* Time Slot Modal */}
+      {timeSlotModalOpen && (
+        <Modal isOpen={timeSlotModalOpen} onClose={() => setTimeSlotModalOpen(false)}>
+          <div className="p-4">
+            <h2>Select Your Preferred Time Slot</h2>
+            <select
+              value={preferredTimeSlot}
+              onChange={handleTimeSlotChange}
+              className="p-2 border border-gray-300 rounded"
+            >
+              <option value="">Select a time slot</option>
+              {timeSlots.map((slot) => (
+                <option key={slot} value={slot}>
+                  {slot}
+                </option>
+              ))}
+            </select>
+            <div className="mt-4 flex justify-end">
+              <Button onClick={handleConfirmTimeSlot} disabled={!preferredTimeSlot}>
+                Confirm
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </div>
     </div>
   );
 }

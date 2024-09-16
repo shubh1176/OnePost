@@ -1,18 +1,20 @@
 import { pgTable, serial, text, varchar, integer, json, boolean } from "drizzle-orm/pg-core";
 
 export const UserData = pgTable('UserData', {
-    user_id: serial('user_id').primaryKey(),
-    email: varchar('email', 255).notNull().unique(),
-    phoneNumber: varchar('phoneNumber', 20),
-    wallet: varchar('wallet').default('0'), // Default as string
-    unicappCoins: integer('unicappCoins').default(0),
-    savedAddresses: json('savedAddresses').default('{}'),
-    createdAt: varchar('createdAt'),
-    isAdmin: boolean('isAdmin').default(false),
-    role: varchar('role', 50),
-    onboarded: boolean('onboarded').default(false),
-    verified: boolean('verified').default(false)
-  });  
+  user_id: serial('user_id').primaryKey(),
+  email: varchar('email', 255).notNull().unique(),
+  phoneNumber: varchar('phoneNumber', 20),
+  wallet: varchar('wallet').default('0'),
+  unicappCoins: integer('unicappCoins').default(0),
+  savedAddresses: json('savedAddresses').default('{}'),
+  createdAt: varchar('createdAt'),
+  isAdmin: boolean('isAdmin').default(false),
+  role: varchar('role', 50),
+  onboarded: boolean('onboarded').default(false),
+  verified: boolean('verified').default(false),
+  preferredTimeSlot: varchar('preferredTimeSlot', 50).default('')
+});
+
   
 export const OrderData = pgTable('OrderData', {
     order_id: varchar('order_id').primaryKey(),
