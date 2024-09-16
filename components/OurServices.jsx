@@ -14,7 +14,7 @@ function OurServices() {
         </span>
         <div className='text-center transition-all duration-300 ease-in-out'>
           <h2 className='text-[#000000] font-filson text-2xl md:text-4xl lg:text-6xl'>
-            One-stop solution for all
+            One-stop solution for 
           </h2>
           <h2 className='text-[#000000] font-filson text-2xl md:text-4xl lg:text-6xl'>
             your delivery needs
@@ -23,11 +23,11 @@ function OurServices() {
 
         <div className='text-center transition-all duration-300 ease-in-out'>
           <span className='font-generalRegular text-base md:text-lg lg:text-2xl'>
-            A personal{' '}
+            A Trusted{' '}
             <span className='font-generalRegular text-[#9E3CE1] text-base md:text-lg lg:text-2xl'>
               delivery
             </span>{' '}
-            partner for everyone
+            partner,connecting all over India.
           </span>
         </div>
 
@@ -100,12 +100,12 @@ function OurServices() {
           </div>
           <div className='flex flex-col items-center transition-all duration-300 ease-in-out'>
             <div className='bg-[#F8EBAB] h-40 w-40 md:h-60 md:w-60 rounded-2xl flex justify-center items-center transition-all duration-300 ease-in-out'>
-              <Image src={'/images/shmf.png'} height={110} width={194} alt="API Integration" />
+              <Image src={'/images/clock.png'} height={110} width={194} alt="API Integration" />
             </div>
             <div className='w-40 md:w-60 mt-0 hover:cursor-pointer transition-all duration-300 ease-in-out' onClick={() => router.replace('/businesses')}>
               <span className='flex flex-row justify-between bg-black rounded-2xl p-2'>
                 <span className='font-generalRegular text-white py-2 px-2 space-x-1 text-base md:text-lg'>
-                  API Integration
+                  Convenient Time slot
                 </span>
                 <Button className="rounded-full bg-[#9E3CE1] border-spacing-1 p-2 hover:bg-[#9E3CE1] transition-all duration-300 ease-in-out">
                   <LucideArrowUpRight />

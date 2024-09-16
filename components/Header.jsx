@@ -56,12 +56,14 @@ function Header() {
         <Button variant="ghost" className="text-white hover:bg-white hover:bg-opacity-20 text-sm md:text-lg" onClick={() => router.push('/businesses')}>
           For Business
         </Button>
+        {/* 
         <Button variant="ghost" className="text-white hover:bg-white hover:bg-opacity-20 text-sm md:text-lg" onClick={() => router.push('/about')}>
           About Us
         </Button>
         <Button variant="ghost" className="text-white hover:bg-white hover:bg-opacity-20 text-sm md:text-lg" onClick={() => router.push('/contact')}>
           Contact
         </Button>
+        */}
       </div>
 
       {/* User Menu */}
@@ -142,12 +144,14 @@ function Header() {
             <Button variant="ghost" className="text-white text-left w-full hover:bg-white hover:bg-opacity-20 text-lg" onClick={() => { router.push('/businesses'); toggleDrawer(); }}>
               Last-mile Delivery
             </Button>
+            {/* 
             <Button variant="ghost" className="text-white text-left w-full hover:bg-white hover:bg-opacity-20 text-lg" onClick={() => { router.push('/about'); toggleDrawer(); }}>
               About Us
             </Button>
             <Button variant="ghost" className="text-white text-left w-full hover:bg-white hover:bg-opacity-20 text-lg" onClick={() => { router.push('/contact'); toggleDrawer(); }}>
               Contact
             </Button>
+            */}
           </nav>
         </div>
       )}
@@ -156,4 +160,5 @@ function Header() {
 }
 
 export default Header;
+
 
